@@ -1,0 +1,38 @@
+/*返回两个double类型的较小值*/
+/*C primer plus第9章 编程练习 第1题*/
+
+#include<stdio.h>
+
+double min(double x,double y);
+
+int main(void)
+{
+	double x,y;
+	
+	
+	printf("Please input two double numbers,");
+	printf("then i will show the min one.(other char will quit):\n");
+		
+	while (scanf("%lf %lf",&x,&y) == 2)
+	{
+		
+		printf("the numbers are %g,and %g\n",x,y);
+		printf("the min one is %g\n",min(x,y));
+		printf("please input two double numbers,");
+		printf("then i will show the min one.(other input will quit):\n");
+	}
+printf("Bye!\n");
+return 0;
+}
+
+
+double min(double x,double y)
+{
+	double small;
+	
+	if (x > y)	
+		small = y;
+	else
+		small = x;
+return small;
+}
