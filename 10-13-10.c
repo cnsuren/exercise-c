@@ -18,7 +18,7 @@ int main (void)
 	char ch;
 	double array_one[num],array_two[num],add_array[num];
 
-	printf("\nassignment the first double type array:named 'array_one'.\n");/*man-machine interaction*/
+	printf("\nassignment the first double type array:named 'array_one'.\n"); /*man-machine interaction*/
 	printf("\nthe array elements number limited by %d\n",num);
 	printf("\nother type input or '#' will finish the input.^_^\n:");
 
