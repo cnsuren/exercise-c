@@ -1,0 +1,50 @@
+/*********************************************************************
+* title:	write and test a function,receive the first word(without" ' ' or '\n' or '\t') into an array. 
+*	
+* C primer Plus  charpter 11 exerices 11-13-03&4
+* 2018/03/09
+*********************************************************************/
+
+#include <stdio.h>
+#define LEN 20
+char *get_word(char *str,int n);
+int main (void)
+{
+    char str[LEN];
+    char *get_pt;
+    printf("Input and output.:\n");
+    get_pt = get_word(str,LEN);
+    if(get_pt == NULL)
+        puts("receive failed.");
+    else
+        puts(str);
+    puts("DONE!");
+
+return 0;
+}
+
+char *get_word(char *str,int n)
+{
+    int ch;
+    int i;
+    for(i = 0;i < n;i++)
+    {
+        ch = getchar();
+        if(ch != EOF && ch != '\n' && ch != ' ' && ch != '\t')
+            *(str + i) = ch;
+        else if(ch == EOF) 
+            return NULL;
+        else if(ch == ' ' || ch == '\t' || ch == '\n')
+        {
+            if(i > 0)
+                break;
+            else
+            {
+                i--;
+                continue;
+            }
+        }
+    }
+    *(str + i) = '\0';
+    return str;
+}
