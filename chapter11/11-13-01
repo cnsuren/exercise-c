@@ -1,0 +1,44 @@
+/*********************************************************************
+* title:	write and test a function,receive number n characters,to an array,and it`s pleace pass as an parameter. 
+*	
+* C primer Plus  charpter 11 exerices 11-13-01
+* 2018/03/09
+*********************************************************************/
+
+#include <stdio.h>
+#define LEN 10
+char *get_ch(char *str,int n);
+int main (void)
+{
+    char str[LEN];
+    char *get_pt;
+    get_pt = get_ch(str,LEN);
+    if(get_pt == NULL)
+        puts("receive failed.");
+    else
+        puts(str);
+    puts("DONE!");
+
+return 0;
+}
+
+char *get_ch(char *str,int n)
+{
+    int ch;
+    int i;
+    for (i = 0;i < n;i++)
+    {
+        ch = getchar();
+        if(ch != EOF)
+           *(str + i) = ch;
+        else
+            break;
+    }
+    if(ch == EOF)
+        return NULL;
+    else
+    {
+        *(str + i) == '\0';
+        return str;
+    }
+}
