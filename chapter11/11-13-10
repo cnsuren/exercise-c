@@ -1,0 +1,68 @@
+/*********************************************************************
+* title:	write a function receive a string ,and delete all the space.use cycle to receive the string line. 
+*	
+* C primer Plus  charpter 11 exerices 11-13-10
+* 2018/03/13
+*********************************************************************/
+
+#include <stdio.h>
+#include<string.h>
+#define LEN 80
+char *delete_space(char str[]);
+int main (void)
+{
+    char ch,s[LEN];
+    char *no_sp_pt;
+    int i,n;
+    puts("Run this program to delete spaces from a string? ?y/n?");
+    while(ch = getchar() == 'y')  /*begin the program in a cycle*/
+    {
+        while(getchar()!= '\n')
+            continue;
+        puts("Input a string in line.max lenth is 80.");
+        i = 0;
+        while(ch = getchar()) /*get a line string.*/
+        {
+            if(i < LEN && ch != '\n') /*when input \n,end the input.*/
+            {
+                s[i] = ch;
+                i++;
+            }
+            else
+            {
+                s[i] = '\0';
+                break;
+            }
+        }
+        printf("The string received is: ");
+        puts(s);/*diplay*/
+        printf("do delete space.and then the string is:");
+        no_sp_pt = delete_space(s);/*function call*/
+        puts(no_sp_pt);/*display*/
+        puts("Try again? y / n ?");
+    }
+    puts("DONE!");
+return 0;
+}
+
+char *delete_space(char str[]) /*function define*/
+{
+    int i,j;
+    char *no_sp = str;/*set a new point to the string*/
+    for(i = 0,j = 0;i < LEN;i++)
+    {
+        if(str[i] != ' ') /*receive element when not a space.*/
+        {    
+            *(no_sp+j) = str[i];
+            j++;
+        }
+        else if(str[i] == '\0')/*if to the end of the string,set '\0'*/
+        {
+            *(no_sp+j) = str[i];
+            break;
+        }
+        else /*if meet space,to the next one*/
+            ;
+    }
+    return no_sp; /*return the point*/
+}
