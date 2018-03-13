@@ -1,0 +1,77 @@
+/*********************************************************************
+* title:	write a function to change the string into reverse order. 
+*	
+* C primer Plus  charpter 11 exerices 11-13-09
+* 2018/03/13
+*********************************************************************/
+
+#include <stdio.h>
+#include<string.h>
+#define LEN 80
+char *get_string(char *s,int n);
+int get_int(void);
+void rev_order_str(char *s);
+int main (void)
+{
+    char ch,s[LEN];
+    char *pt_s;
+    int n;
+    puts("Run this program to reverse order a string? ?y/n?");
+    while(ch = getchar() == 'y')
+    {
+        while(getchar()!= '\n')
+            continue;
+        puts("Input a string,length is 80,or '#' to end.:");
+        pt_s = get_string(s,LEN);
+        if(pt_s == NULL)
+            puts("receive failed.");
+        else
+        {  
+            printf("The string received is: ");
+            puts(pt_s);
+            puts("changing the order...is:");
+            rev_order_str(pt_s);
+            puts(pt_s);
+        }
+        puts("Try again? y / n ?");
+    }
+    puts("DONE!");
+return 0;
+}
+
+char *get_string(char *s,int n)
+{
+    int ch;
+    int i;
+    for(i = 0;i < n;i++)
+    {
+        ch = getchar();
+        if(ch != EOF && ch != '#')
+            *(s + i) = ch;
+        else if(ch == EOF) 
+            return NULL;
+        else if(ch == '#')
+            break;
+    }
+    while(getchar() != '\n')
+        continue;
+    *(s + i) = '\0';
+    return s;
+}
+
+void rev_order_str(char *s)
+{
+    char temp[LEN];
+    int i,j;
+    for(i = 0;i < LEN;i++)
+    {
+        if(*(s+i) != '\0')
+            temp[i] = s[i];
+        else
+            break;
+    }
+    j = i;
+    for(i = 0;i < j;i++)
+        *(s+i) = temp[j-i-1];
+    *(s+j) = '\0';
+}
