@@ -1,0 +1,84 @@
+/*********************************************************************
+* title:	search character from a string. 
+*	
+* C primer Plus  charpter 11 exerices 11-13-06
+* 2018/03/09
+*********************************************************************/
+
+#include <stdio.h>
+#include<string.h>
+#define LEN 80
+char *get_string(char *str,int n);
+int search_res(char *str,char ch,int n);
+int main (void)
+{
+    char str[LEN];
+    char tar;
+    char *get_pt;
+    int tar_pt;
+    puts("Input a string,length is 80,or '#' to end.:");
+    get_pt = get_string(str,LEN);
+    if(get_pt == NULL)
+        puts("receive failed.");
+    else
+    {  
+        while(getchar() != '\n')
+            continue;
+        puts("The string received is: ");
+        puts(get_pt);
+        puts("what do you want to search for? '#' to quit.");
+        while((scanf("%c",&tar) == 1) && (tar != '#'))
+        {
+            while(getchar() != '\n')
+                continue;
+            printf("search %c.\n",tar);
+            tar_pt = search_res(get_pt,tar,strlen(get_pt));
+            if(tar_pt == 0)
+                printf("No %c here!!\n",tar);
+            else
+                printf("Yes,%c is here.\n",tar);
+            puts("Try again? or input # to quit!");
+
+        }
+    }
+    puts("DONE!");
+return 0;
+}
+
+char *get_string(char *str,int n)
+{
+    int ch;
+    int i;
+    for(i = 0;i < n;i++)
+    {
+        ch = getchar();
+        if(ch != EOF && ch != '#')
+            *(str + i) = ch;
+        else if(ch == EOF) 
+            return NULL;
+        else if(ch == '#')
+            break;
+    }
+    *(str + i) = '\0';
+    return str;
+}
+
+int search_res(char *str,char ch,int n)
+{
+    int i,count;
+    count = 0;
+
+    for(i = 0;i < n;i++)
+    {
+        if(str[i] == ch)
+        {
+            count ++;
+        }
+        else
+            ;
+    }
+    if(count == 0)
+        return 0;
+    else
+        return 1;
+}

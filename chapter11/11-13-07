@@ -1,0 +1,110 @@
+/*********************************************************************
+* title:	write a function "mystrncpy()",just as strncpy() do . 
+*	
+* C primer Plus  charpter 11 exerices 11-13-07
+* 2018/03/13
+*********************************************************************/
+
+#include <stdio.h>
+#include<string.h>
+#define LEN 80
+char *get_string(char *s2,int n);
+int get_int(void);
+char *mystrncpy(char *s1,char *s2,int n);
+int main (void)
+{
+    char ch,s1[LEN],s2[LEN];
+    char *pt_s1,*pt_s2;
+    int n;
+    puts("do copy from s2 to s1 ?y/n?");
+    while(ch = getchar() == 'y')
+    {
+        while(getchar()!= '\n')
+            continue;
+        puts("Input a string,length is 80,or '#' to end.:");
+        pt_s2 = get_string(s2,LEN);
+        if(s2 == NULL)
+            puts("receive failed.");
+        else
+        {  
+            puts("The string received is:");
+            puts(pt_s2);
+        
+            printf("Now,set how many characters to copy.\n");
+            n = get_int(); 
+            printf("copy %d of s2 to s1\n",n);
+            pt_s1 = mystrncpy(s1,s2,n);
+            
+            printf("Now,s1[%d] = ",n);
+            puts(pt_s1);
+            
+            while(getchar() != '\n')
+                continue;
+ 
+        }
+        
+        puts("Try again? or input # to quit!");
+    }
+    puts("DONE!");
+return 0;
+}
+
+char *get_string(char *s2,int n)
+{
+    int ch;
+    int i;
+    for(i = 0;i < n;i++)
+    {
+        ch = getchar();
+        while(ch == '\n')
+            continue;
+        if(ch != EOF && ch != '#')
+            *(s2 + i) = ch;
+        else if(ch == EOF) 
+            return NULL;
+        else if(ch == '#')
+            break;
+    }
+    *(s2 + i) = '\0';
+    return s2;
+}
+
+char *mystrncpy(char *s1,char *s2,int n)
+{
+    int i,j;
+    j = 0;
+    for(i = 0;i < LEN;i++)
+    {
+        if(s2[i] != '\0')
+            j++;
+        else
+            break;
+    }
+    if (j >= n)
+    {
+        for(i = 0;i < n;i++)
+            s1[i] = s2[i];
+        s1[i] = '\0';
+        return s1;
+    }
+    else if(j < n)
+    {
+        for(i = 0;i < j;i++)
+            s1[i] = s2[i];
+        s1[i] = '\0';
+        return s1;
+    }
+}
+
+int get_int(void)
+{
+    int n;
+    while(scanf("%d",&n) != 1)
+    {
+     while(getchar() != '\n')
+        continue;
+   printf("input is not a integer type value,try again!");
+            
+    }
+        return n;
+}

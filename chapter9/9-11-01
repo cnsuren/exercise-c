@@ -11,15 +11,14 @@ int main(void)
 	
 	
 	printf("Please input two double numbers,");
-	printf("then i will show the min one.(other char will quit):\n");
+	printf("then i will show the min one.(other type input will quit):\n");
 		
 	while (scanf("%lf %lf",&x,&y) == 2)
 	{
 		
 		printf("the numbers are %g,and %g\n",x,y);
 		printf("the min one is %g\n",min(x,y));
-		printf("please input two double numbers,");
-		printf("then i will show the min one.(other input will quit):\n");
+		printf("Try again?or input other type value to quit):\n");
 	}
 printf("Bye!\n");
 return 0;
