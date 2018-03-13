@@ -1,0 +1,112 @@
+/*********************************************************************
+* title:	write a function "string_in(s1,s2)",to judge if s2 is in s1. 
+*	
+* C primer Plus  charpter 11 exerices 11-13-08
+* 2018/03/13
+*********************************************************************/
+
+#include <stdio.h>
+#include<string.h>
+#define LEN 80
+char *get_string(char *s,int n);
+int get_int(void);
+char *string_in(char *s1,char *s2);
+int main (void)
+{
+    char ch,s1[LEN],s2[LEN];
+    char *pt_s1,*pt_s2,*str_in;
+    int n;
+    puts("Run this program to search string2 in string1? ?y/n?");
+    while(ch = getchar() == 'y')
+    {
+        while(getchar()!= '\n')
+            continue;
+        puts("Input a string :s1,length is 80,or '#' to end.:");
+        pt_s1 = get_string(s1,LEN);
+        puts("and input the s2 too.");
+        pt_s2 = get_string(s2,LEN);
+        if(pt_s1 == NULL || pt_s2 == NULL)
+            puts("receive failed.");
+        else
+        {  
+            printf("The string received is:s1 = ");
+            puts(pt_s1);
+            printf("s2 = ");
+            puts(pt_s2);
+            str_in = string_in(s1,s2);
+            if(str_in == NULL)
+                puts("No find!");
+            else
+                printf("and the first address of s2 in s1 is .%p\n",str_in);
+        }
+        
+        puts("Try again? or input # to quit!");
+    }
+    puts("DONE!");
+return 0;
+}
+
+char *get_string(char *s,int n)
+{
+    int ch;
+    int i;
+    for(i = 0;i < n;i++)
+    {
+        ch = getchar();
+        if(ch != EOF && ch != '#')
+            *(s + i) = ch;
+        else if(ch == EOF) 
+            return NULL;
+        else if(ch == '#')
+            break;
+    }
+    while(getchar() != '\n')
+        continue;
+    *(s + i) = '\0';
+    return s;
+}
+
+char *string_in(char *s1,char *s2)
+{
+    int i,j,count1,count2;
+    count1 = 0;
+    count2 = 0;
+    for(i = 0;i < LEN;i++)
+    {
+        if(s1[i] != '\0')
+            count1++;
+        else
+            break;
+    }
+    for(i = 0;i < LEN;i++)
+    {
+        if(s2[i] != '\0')
+            count2++;
+        else
+            break;
+    }
+    for(i = 0,j = 0;i < count1 && j < count2;i++)
+    {
+        if(s1[i] == s2 [j])
+            j++;
+        else
+            ;
+    }
+    if(j == count2)
+        return s1+i-j;
+    else
+        return NULL;
+}
+
+int get_int(void)
+{
+    int n;
+    while(scanf("%d",&n) != 1)
+    {
+     while(getchar() != '\n')
+        continue;
+   printf("input is not a integer type value,try again!");
+            
+    }
+        return n;
+}
